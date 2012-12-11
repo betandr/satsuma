@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= application %> - <%= application_description %></title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="content">
+<h1><%= link_to application, "/" %></h1>
+<h2><%= application_description %></h2>
+<%= yield :navigation %>
+<br/><br/>
+<%= yield %>
+</div>
+
+</body>
+</html>

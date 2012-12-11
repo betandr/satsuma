@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  realtime_id: 1
+  type: 
+  start: 2012-03-08 14:44:49
+  end: 2012-03-08 14:44:49
+  artist: MyString
+  title: MyString
+  content: MyText
+
+two:
+  realtime_id: 1
+  type: 
+  start: 2012-03-08 14:44:49
+  end: 2012-03-08 14:44:49
+  artist: MyString
+  title: MyString
+  content: MyText

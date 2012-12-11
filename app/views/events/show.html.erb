@@ -1,0 +1,36 @@
+<% content_for :navigation do %>
+<%= link_to "networks", "/" %> | 
+<%= link_to "schedule", "/networks/#{params[:web_key]}/schedule/#{format_date_without_time_for_urls @event.start.to_s}" %> | events
+<% end %>
+
+<% begin %>
+
+<p>
+<%- if @event.message_type == 'now_playing' -%>
+    <%= @event.title %> by <%= @event.artist %> <i>on <%= network_title params[:web_key] %></i>
+<%- elsif @event.message_type == 'text' -%>
+    "<%= @event.content %>"
+<%- end -%>
+</p>
+
+<% if @event.musicbrainz_id.nil? %>
+    <img src="/images/no_artist_art.gif"/>
+<% else %>
+<p>
+    <img src="http://static.bbc.co.uk/music/images/artists/234x132/<%= @event.musicbrainz_id %>.jpg"/>
+</p>
+<%- end -%>
+
+<div>
+    <object data="/dewplayer.swf" width="200" height="20" name="dewplayer" id="dewplayer" type="application/x-shockwave-flash">
+    	<param name="movie" value="/dewplayer.swf" />
+    	<param name="flashvars" value="mp3=<%= @rot_url %>" />
+    	<param name="wmode" value="transparent" />
+    </object>
+</div>
+
+<% rescue %>
+<i>Could not find RoT for this event</i>
+<% end %>
+
+<p><i>From <%= format_date_as_timestamp @event.start.to_s %> until <%= format_date_as_timestamp @event.end.to_s %> on <%= format_date_without_time @event.end.to_s %></i></p>

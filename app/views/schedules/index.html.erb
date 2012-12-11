@@ -1,0 +1,16 @@
+<h3>Schedule for <em><%= @network.name %></em> on <em><%= friendly_format_date_param params[:period] %></em></h3>
+
+<% content_for :navigation do %>
+<%= link_to "networks", "/" %>
+<% end %>
+
+<%= link_to "< Previous Day", "/networks/#{params[:web_key]}/schedule/#{format_previous_day params[:period]}" %> | 
+<%= link_to "Next Day >", "/networks/#{params[:web_key]}/schedule/#{format_next_day params[:period]}" %>
+
+<% @broadcasts.each do |broadcast| %>
+    <p>
+	<%= link_to(broadcast[:title], "/networks/#{params[:web_key]}/events?start=#{format_date broadcast[:start]}&end=#{format_date broadcast[:end]}") %><br/>
+    <%= format_date(broadcast[:start]) %> - <%= format_date(broadcast[:end]) %><br/>
+    <em><%= broadcast[:short_synposis] %></em>
+    </p>
+<% end %>

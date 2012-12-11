@@ -1,0 +1,19 @@
+<% content_for :navigation do %>
+<%= link_to "networks", "/" %> | <%= link_to "schedule", "/networks/#{params[:web_key]}/schedule/#{format_date_without_time_for_urls params[:start]}" %>
+<% end %>
+
+<h3><%= @events.size %> events for <%= @network.name %> from <%= format_timestamp @start %> until <%= format_timestamp @end %></h3>
+
+<% @events.each do |event| %>
+    <p><%= event[:type].gsub('_', ' ').capitalize %>:
+    
+    <%- if event[:type] == 'now_playing' -%>
+        <%= link_to "#{event[:title]} by #{event[:artist]}", "/networks/#{params[:web_key]}/events/#{event[:realtime_id]}" %>
+
+    <%- elsif event[:type] == 'text' -%>
+        "<%= event[:content] %>"
+    <%- end -%>
+    <br/>
+    
+    <%= event[:start] %> - <%= event[:end] %></p>
+<% end %>
